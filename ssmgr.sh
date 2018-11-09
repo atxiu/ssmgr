@@ -4,7 +4,6 @@ yum install centos-release-yum4 -y
 yum install dnf -y
 echo "fastestmirror=true" >> /etc/dnf/dnf.conf
 dnf install dnf-plugins-core epel-release -y
-dnf update -y
 LANG=en_US.UTF-8
 dnf copr enable librehat/shadowsocks -y
 dnf install shadowsocks-libev m2crypto rng-tools -y
