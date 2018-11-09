@@ -1,6 +1,7 @@
 #!/bin/bash
-#更新系统和必要服务
+#更新必要服务
 yum install centos-release-yum4 -y
+#yum 出错 安装dnf兼容一些写法
 yum install dnf -y
 echo "fastestmirror=true" >> /etc/dnf/dnf.conf
 dnf install dnf-plugins-core epel-release -y
