@@ -3,9 +3,12 @@
 yum install centos-release-yum4 -y
 #yum 出错 安装dnf兼容一些写法
 yum install dnf -y
+#启用自动选择最快节点
 echo "fastestmirror=true" >> /etc/dnf/dnf.conf
 dnf install dnf-plugins-core epel-release -y
+#更改为en_US.UTF-8 以提高兼容性
 LANG=en_US.UTF-8
+#安装
 dnf copr enable librehat/shadowsocks -y
 dnf install shadowsocks-libev m2crypto rng-tools -y
 #ssmgr
