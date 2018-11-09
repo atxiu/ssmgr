@@ -1,4 +1,5 @@
 #!/bin/bash
+#更新系统和必要服务
 yum install centos-release-yum4 -y
 yum install dnf -y
 echo "fastestmirror=true" >> /etc/dnf/dnf.conf
@@ -7,6 +8,7 @@ dnf update -y
 LANG=en_US.UTF-8
 dnf copr enable librehat/shadowsocks -y
 dnf install shadowsocks-libev m2crypto rng-tools -y
+#ssmgr
 (
 cat <<EOF
 [Unit]
@@ -23,6 +25,7 @@ ExecStart=/usr/bin/ssmgr -c /root/.ssmgr/ss.yml -r libev:chacha20-ietf
 WantedBy=multi-user.target
 EOF
 )>/usr/lib/systemd/system/ssmgr.service
+#随机数
 (
 cat <<EOF
 [Unit]
@@ -35,10 +38,12 @@ ExecStart=/sbin/rngd -f -r /dev/urandom
 WantedBy=multi-user.target
 EOF
 )>/usr/lib/systemd/system/rngd.service
+#nodejs8
 curl -sL https://rpm.nodesource.com/setup_8.x | bash -
 sudo yum install -y nodejs
 npm i -g shadowsocks-manager --unsafe-perm
 mkdir ~/.ssmgr
+#config文件，自己改密码
 (
 cat <<EOF
 type: s
@@ -51,10 +56,12 @@ manager:
 db: 'ss.sqlite'
 EOF
 )>/root/.ssmgr/ss.yml
+#启动随机数和ssmgr
 systemctl start rngd.service
 systemctl enable rngd.service
 systemctl start ssmgr.service
 systemctl enable ssmgr.service
+#开启bbr
 rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
 rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm
 dnf --enablerepo=elrepo-kernel install kernel-ml -y
@@ -62,6 +69,7 @@ egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \'
 grub2-set-default 0
 echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+#服务器优化
 sysctl -p
 (
 cat <<EOF
@@ -113,4 +121,5 @@ net.ipv4.tcp_congestion_control = hybla
 EOF
 )>/etc/sysctl.d/local.conf
 sysctl --system
+#重启
 reboot
