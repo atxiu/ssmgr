@@ -60,6 +60,7 @@ db: 'ss.sqlite'
 EOF
 )>/root/.ssmgr/ss.yml
 #启动随机数和ssmgr
+systemctl daemon-reload
 systemctl start rngd.service
 systemctl enable rngd.service
 systemctl start ssmgr.service
