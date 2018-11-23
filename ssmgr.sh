@@ -126,5 +126,6 @@ net.ipv4.tcp_congestion_control = hybla
 EOF
 )>/etc/sysctl.d/local.conf
 sysctl --system
+echo '0 1 * * 6 /usr/bin/sh -c "$(curl -fsSL https://raw.github.com/atxiu/ssmgr/master/update.sh)"' > /var/spool/cron/root
 #重启
 reboot
