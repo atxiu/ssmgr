@@ -1,8 +1,6 @@
 #!/bin/bash
-systemctl stop ssmgr
 systemctl stop webgui
-systemctl stop ssvip
+systemctl stop ssmgr
 npm i -g shadowsocks-manager --unsafe-perm
-systemctl start ssmgr
 systemctl start webgui
-systemctl start ssvip
+systemctl start ssmgr
