@@ -1,4 +1,5 @@
 #!/bin/bash
+passwd=${1:-123456}
 timedatectl set-timezone Asia/Shanghai
 #更新必要服务
 yum install centos-release-yum4 -y
@@ -56,7 +57,7 @@ shadowsocks:
   address: 127.0.0.1:4000
 manager:
   address: 0.0.0.0:4001
-  password: '123456'
+  password: '$passwd'
 db: 'ss.sqlite'
 EOF
 )>/root/.ssmgr/ss.yml
