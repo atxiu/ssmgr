@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
 curl -sSL http://update.aegis.aliyun.com/download/quartz_uninstall.sh | sudo bash
 sudo systemctl daemon-reload
 sudo systemctl stop agentwatch.service
