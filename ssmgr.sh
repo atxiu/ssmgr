@@ -1,12 +1,17 @@
 #!/bin/bash
+timedatectl set-timezone Asia/Shanghai
 #更新必要服务
+yum install centos-release-yum4 -y
+#yum 出错 安装dnf兼容一些写法
+yum install dnf -y
 #启用自动选择最快节点
-yum install yum-plugin-copr epel-release -y
+echo "fastestmirror=true" >> /etc/dnf/dnf.conf
+dnf install dnf-plugins-core epel-release -y
 #更改为en_US.UTF-8 以提高兼容性
 LANG=en_US.UTF-8
 #安装
-yum copr enable librehat/shadowsocks -y
-yum install shadowsocks-libev m2crypto rng-tools -y
+dnf copr enable librehat/shadowsocks -y
+dnf install shadowsocks-libev m2crypto rng-tools -y
 #ssmgr
 (
 cat <<EOF
@@ -39,7 +44,7 @@ EOF
 )>/usr/lib/systemd/system/rngd.service
 #nodejs8
 curl -sL https://rpm.nodesource.com/setup_8.x | bash -
-sudo yum install -y nodejs
+sudo dnf install -y nodejs
 npm i -g shadowsocks-manager --unsafe-perm
 mkdir ~/.ssmgr
 #config文件，自己改密码
@@ -64,7 +69,7 @@ systemctl enable ssmgr.service
 #开启bbr
 rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
 rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm
-yum --enablerepo=elrepo-kernel install kernel-ml -y
+dnf --enablerepo=elrepo-kernel install kernel-ml -y
 egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \'
 grub2-set-default 0
 echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
