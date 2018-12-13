@@ -13,23 +13,6 @@ LANG=en_US.UTF-8
 #安装
 dnf copr enable librehat/shadowsocks -y
 dnf install shadowsocks-libev m2crypto rng-tools -y
-#ssmgr
-(
-cat <<EOF
-[Unit]
-Description=ssmgr
-After=network.target
-
-[Service]
-Type=simple
-ExecStart=/usr/bin/ssmgr -c /root/.ssmgr/ss.yml -r libev:chacha20-ietf
-#User=nobody
-#Group=nobody
-
-[Install]
-WantedBy=multi-user.target
-EOF
-)>/usr/lib/systemd/system/ssmgr.service
 #随机数
 (
 cat <<EOF
@@ -65,8 +48,9 @@ EOF
 systemctl daemon-reload
 systemctl start rngd.service
 systemctl enable rngd.service
-systemctl start ssmgr.service
-systemctl enable ssmgr.service
+pm2 --name "s" -f start ssmgr -x -- -c ss.yml -r libev:chacha20-ietf
+pm2 startup
+pm2 save
 #开启bbr
 rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
 rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm
