@@ -51,14 +51,6 @@ systemctl enable rngd.service
 pm2 --name "s" -f start ssmgr -x -- -c ss.yml -r libev:chacha20-ietf
 pm2 startup
 pm2 save
-#开启bbr
-rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
-rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm
-dnf --enablerepo=elrepo-kernel install kernel-ml -y
-egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \'
-grub2-set-default 0
-echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
-echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
 #服务器优化
 sysctl -p
 (
