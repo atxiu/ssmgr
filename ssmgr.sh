@@ -7,7 +7,7 @@ yum install centos-release-yum4 -y
 yum install dnf -y
 #启用自动选择最快节点
 echo "fastestmirror=true" >> /etc/dnf/dnf.conf
-dnf install dnf-plugins-core epel-release -y
+dnf install dnf-plugins-core epel-release wget net-tools -y
 #更改为en_US.UTF-8 以提高兼容性
 LANG=en_US.UTF-8
 #安装
