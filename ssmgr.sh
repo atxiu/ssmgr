@@ -1,5 +1,6 @@
 #!/bin/bash
-passwd=${1:-123456}
+#passwd=${1:-123456}
+passwd=$(< /dev/urandom tr -dc 0-9-A-Z-a-z-|head -c ${1:-16})
 timedatectl set-timezone Asia/Shanghai
 #更新必要服务
 yum install centos-release-yum4 -y
