@@ -12,6 +12,7 @@ dnf install dnf-plugins-core epel-release wget net-tools -y
 #更改为en_US.UTF-8 以提高兼容性
 LANG=en_US.UTF-8
 #安装
+dnf install 'dnf-command(copr)' -y
 dnf copr enable librehat/shadowsocks -y
 dnf install shadowsocks-libev m2crypto rng-tools -y
 #随机数
