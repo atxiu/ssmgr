@@ -1,5 +1,6 @@
 #!/bin/bash
-passwd=${1:-123456}
+#passwd=${1:-123456}
+passwd=$(< /dev/urandom tr -dc 0-9-A-Z-a-z-|head -c ${1:-16})
 timedatectl set-timezone Asia/Shanghai
 #更新必要服务
 yum install centos-release-yum4 -y
@@ -107,6 +108,6 @@ net.ipv4.tcp_congestion_control = hybla
 EOF
 )>/etc/sysctl.d/local.conf
 sysctl --system
-echo '0 1 * * 6 /usr/bin/sh -c "$(curl -fsSL https://raw.github.com/atxiu/ssmgr/master/update.sh)"' > /var/spool/cron/root
+#echo '0 1 * * 6 /usr/bin/sh -c "$(curl -fsSL https://raw.github.com/atxiu/ssmgr/master/update.sh)"' > /var/spool/cron/root
 #重启
 reboot
