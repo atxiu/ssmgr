@@ -29,7 +29,7 @@ EOF
 #nodejs8
 curl -sL https://rpm.nodesource.com/setup_8.x | bash -
 sudo dnf install -y nodejs
-npm i -g shadowsocks-manager --unsafe-perm
+npm i -g shadowsocks-manager@0.29.15 --unsafe-perm
 mkdir ~/.ssmgr
 #config文件，自己改密码
 (
