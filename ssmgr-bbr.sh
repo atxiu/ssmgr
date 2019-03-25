@@ -2,6 +2,8 @@
 #passwd=${1:-123456}
 passwd=$(< /dev/urandom tr -dc 0-9-A-Z-a-z-|head -c ${1:-16})
 timedatectl set-timezone Asia/Shanghai
+yum remove epel-release -y
+#搬瓦工自家epel源删除了mbedtls、libsodium加密库
 #更新必要服务
 yum install centos-release-yum4 -y
 #yum 出错 安装dnf兼容一些写法
