@@ -53,7 +53,7 @@ systemctl daemon-reload
 systemctl start rngd.service
 systemctl enable rngd.service
 npm i -g pm2
-pm2 --name "s" -f start ssmgr -x -- -c ss.yml -r libev:aes-256-cfb
+pm2 --name "s" -f start ssmgr -x -- -c ss.yml -r libev:aes-128-gcm
 pm2 startup
 pm2 save
 #服务器优化
