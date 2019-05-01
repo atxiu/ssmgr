@@ -1,16 +1,17 @@
 #!/bin/bash
-git clone "https://github.com/gyteng/shadowsocks-manager-tiny.git"
 passwd=$(< /dev/urandom tr -dc 0-9-A-Z-a-z-|head -c "${1:-16}")
 sudo yum remove epel-release -y
 sudo yum install -y epel-release yum-fastestmirror yum-plugin-copr
 sudo yum copr enable librehat/shadowsocks -y
-sudo yum install shadowsocks-libev haveged -y
+sudo yum install shadowsocks-libev haveged git -y
+mkdir ~/.ssmgr-tiny
+git clone "https://github.com/gyteng/shadowsocks-manager-tiny.git" ~/.ssmgr-tiny
 curl -sL https://rpm.nodesource.com/setup_8.x | bash -
 sudo yum install -y nodejs
 systemctl start haveged.service
 systemctl enable haveged.service
 npm i -g pm2
-pm2 --name "sgame" -f start node -x -- index.js -s 127.0.0.1:6665 -m 0.0.0.0:6666 -p 123456 -r libev:aes-128-gcm -d ./data.json
+pm2 --name "s" -f start node -x -- ~/.ssmgr-tiny/index.js -s 127.0.0.1:6601 -m 0.0.0.0:6602 -p "$passwd" -r libev:aes-128-gcm -d ~/.ssmgr-tiny/data.json
 pm2 startup
 pm2 save
 (
@@ -37,7 +38,6 @@ net.ipv4.tcp_mtu_probing = 1
 net.ipv4.tcp_congestion_control = hybla
 EOF
 )>/etc/sysctl.d/local.conf
-sysctl -p
 sysctl --system
 echo '0 1 * * * /usr/bin/pm2 restart all' > /var/spool/cron/root
 reboot
