@@ -23,7 +23,6 @@ egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \'
 grub2-set-default 0
 echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
-sysctl -p
 #服务器优化
 (
 cat <<EOF
