@@ -5,6 +5,7 @@ timedatectl set-timezone Asia/Shanghai
 #更新必要服务
 yum remove epel-release -y
 #搬瓦工自家epel源删除了mbedtls、libsodium加密库
+yum install epel-release -y
 yum install centos-release-yum4 -y
 #yum 出错 安装dnf兼容一些写法
 yum install dnf -y
