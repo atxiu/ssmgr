@@ -2,7 +2,7 @@
 passwd=$(< /dev/urandom tr -dc 0-9-A-Z-a-z-|head -c "${1:-16}")
 sudo yum remove epel-release -y
 sudo yum install -y epel-release
-sudo yum install -y epel-release yum-fastestmirror yum-plugin-copr
+sudo yum install -y yum-fastestmirror yum-plugin-copr
 sudo yum copr enable librehat/shadowsocks -y
 sudo yum install shadowsocks-libev haveged git -y
 mkdir ~/.ssmgr-tiny
