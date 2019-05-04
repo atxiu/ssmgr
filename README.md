@@ -1,5 +1,6 @@
 # ssmgr
-## shadowsocks-manager s端自动化部署，默认为AES-256-GCM
+
+#### shadowsocks-manager s端自动化部署，默认为AES-256-GCM，密码16位大小写字母随机。
 
 tiny版不带bbr
 ```
