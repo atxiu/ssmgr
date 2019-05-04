@@ -42,4 +42,5 @@ EOF
 )>/etc/sysctl.d/local.conf
 sysctl --system
 echo '0 1 * * * /usr/bin/pm2 restart all' > /var/spool/cron/root
+echo "passwd is $passwd\n"
 reboot
