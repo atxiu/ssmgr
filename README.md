@@ -1,4 +1,5 @@
 # ssmgr
+## shadowsocks-manager s端自动化部署，默认为AES-256-GCM
 
 tiny版不带bbr
 ```
