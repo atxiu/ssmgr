@@ -5,7 +5,9 @@ sudo yum remove epel-release -y
 sudo yum install -y yum-fastestmirror yum-plugin-copr curl
 sudo yum copr enable librehat/shadowsocks -y
 sudo yum install -y epel-release
-sudo yum install shadowsocks-libev haveged git -y
+sudo yum install shadowsocks-libev haveged git ntpdate -y
+timedatectl set-timezone Asia/Shanghai
+ntpdate ntp1.aliyun.com
 mkdir ~/.ssmgr-tiny
 git clone "https://github.com/gyteng/shadowsocks-manager-tiny.git" ~/.ssmgr-tiny
 curl -sL https://rpm.nodesource.com/setup_8.x | bash -
