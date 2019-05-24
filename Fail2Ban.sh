@@ -13,7 +13,7 @@ logpath = %(sshd_log)s
 maxretry = 5
 bantime = 86400
 EOF
-)>/etc/sysctl.d/local.conf
+)>/etc/fail2ban/jail.d/sshd.local
 systemctl enable firewalld
 systemctl start firewalld
 systemctl enable fail2ban
