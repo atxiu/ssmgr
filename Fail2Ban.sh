@@ -2,9 +2,15 @@
 yum install -y epel-release
 yum install -y fail2ban fail2ban-systemd
 yum update -y selinux-policy*
-cp -pf /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
 (
 cat <<EOF
+[DEFAULT]
+ignoreip = 127.0.0.1/8
+bantime  = 86400
+findtime = 600
+maxretry = 5
+banaction = firewallcmd-ipset
+action = %(action_mwl)s
 [sshd]
 enabled = true
 port = ssh
@@ -13,7 +19,7 @@ logpath = %(sshd_log)s
 maxretry = 5
 bantime = 86400
 EOF
-)>/etc/fail2ban/jail.d/sshd.local
+)>/etc/fail2ban/jail.local
 systemctl enable firewalld
 systemctl start firewalld
 systemctl enable fail2ban
