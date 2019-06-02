@@ -18,7 +18,7 @@ sudo yum install -y nodejs
 systemctl start haveged.service
 systemctl enable haveged.service
 npm i -g pm2
-pm2 --name "s" -f start node -x -- ~/.ssmgr-tiny/index.js -s 127.0.0.1:6601 -m 0.0.0.0:6602 -p "$passwd" -r libev:aes-256-gcm -d ~/.ssmgr-tiny/data.json
+pm2 --name "s" -f start node -x -- ~/.ssmgr-tiny/index.js -s 127.0.0.1:6601 -m 0.0.0.0:6602 -p "$passwd" -r libev:aes-128-gcm -d ~/.ssmgr-tiny/data.json
 pm2 startup
 pm2 save
 #开启bbr
