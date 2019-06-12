@@ -1,11 +1,16 @@
 #!/bin/bash
+systemctl status crond.service
+systemctl disable crond.service
 passwd=$(< /dev/urandom tr -dc 0-9-A-Z-a-z-|head -c "${1:-16}")
 #搬瓦工自家epel源删除了mbedtls、libsodium加密库
 sudo yum remove epel-release -y
 sudo yum install -y yum-fastestmirror yum-plugin-copr curl
 sudo yum copr enable librehat/shadowsocks -y
 sudo yum install -y epel-release
-sudo yum install shadowsocks-libev haveged git -y
+sudo yum install shadowsocks-libev haveged git ntpdate -y
+timedatectl set-timezone Asia/Shanghai
+ntpdate ntp1.aliyun.com
+timedatectl set-local-rtc 1
 mkdir ~/.ssmgr-tiny
 git clone "https://github.com/gyteng/shadowsocks-manager-tiny.git" ~/.ssmgr-tiny
 curl -sL https://rpm.nodesource.com/setup_8.x | bash -
@@ -13,9 +18,10 @@ sudo yum install -y nodejs
 systemctl start haveged.service
 systemctl enable haveged.service
 npm i -g pm2
-pm2 --name "s" -f start node -x -- ~/.ssmgr-tiny/index.js -s 127.0.0.1:6601 -m 0.0.0.0:6602 -p "$passwd" -r libev:aes-256-gcm -d ~/.ssmgr-tiny/data.json
+pm2 --name "s" -f start node -x -- ~/.ssmgr-tiny/index.js -s 127.0.0.1:6601 -m 0.0.0.0:6602 -p "$passwd" -r libev:aes-128-gcm -d ~/.ssmgr-tiny/data.json
 pm2 startup
 pm2 save
+#服务器优化
 (
 cat <<EOF
 fs.file-max = 51200
@@ -42,5 +48,4 @@ EOF
 )>/etc/sysctl.d/local.conf
 sysctl --system
 echo '0 1 * * * /usr/bin/pm2 restart all' > /var/spool/cron/root
-echo "passwd is $passwd\n"
 reboot
