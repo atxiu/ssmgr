@@ -7,7 +7,7 @@ sudo yum remove epel-release -y
 sudo yum install -y epel-release
 sudo yum install -y yum-fastestmirror 
 sudo yum install libsodium haveged git ntpdate curl -y
-sudo yum install python-setuptools && easy_install pip
+sudo yum install python-setuptools && easy_install pip -y
 sudo pip install git+https://github.com/shadowsocks/shadowsocks.git@master
 timedatectl set-timezone Asia/Shanghai
 ntpdate ntp1.aliyun.com
