@@ -13,7 +13,7 @@ timedatectl set-timezone Asia/Shanghai
 ntpdate ntp1.aliyun.com
 timedatectl set-local-rtc 1
 mkdir ~/.py-tiny
-git clone "https://github.com/gyteng/shadowsocks-manager-tiny.git" ~/.py-tiny
+git clone "https://github.com/atxiu/shadowsocks-manager-tiny.git" ~/.py-tiny
 curl -sL https://rpm.nodesource.com/setup_8.x | bash -
 sudo yum install -y nodejs
 systemctl start haveged.service
