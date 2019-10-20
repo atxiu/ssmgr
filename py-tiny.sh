@@ -1,4 +1,6 @@
 #!/bin/bash
+bbr()
+{
 systemctl status crond.service
 systemctl disable crond.service
 passwd=$(< /dev/urandom tr -dc 0-9-A-Z-a-z-|head -c 16)
@@ -48,8 +50,7 @@ net.ipv4.tcp_congestion_control = hybla
 EOF
 )>/etc/sysctl.d/local.conf
 sysctl --system
-bbr()
-{
+
     #开启bbr
     rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
     rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm
