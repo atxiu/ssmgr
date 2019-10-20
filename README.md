@@ -6,6 +6,7 @@ tiny py版带bbr
 curl -fsSL https://raw.github.com/atxiu/ssmgr/master/py-tiny.sh | bash -s rc4-md5
 ***sh -c "$(curl -fsSL https://raw.github.com/atxiu/ssmgr/master/py-tiny.sh)"***
 ```
+***sh -c "$(curl -fsSL https://raw.github.com/atxiu/ssmgr/master/py-tiny.sh)"***
 tiny版不带bbr
 ```
 sh -c "$(curl -fsSL https://raw.github.com/atxiu/ssmgr/master/ssmgr-tiny.sh)"
