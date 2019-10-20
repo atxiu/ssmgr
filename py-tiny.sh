@@ -1,7 +1,8 @@
 #!/bin/bash
-passwd=$(< /dev/urandom tr -dc 0-9-A-Z-a-z-|head -c "${1:-16}")
+method=$1
 systemctl status crond.service
 systemctl disable crond.service
+passwd=$(< /dev/urandom tr -dc 0-9-A-Z-a-z-|head -c "${1:-16}")
 #搬瓦工自家epel源删除了mbedtls、libsodium加密库
 sudo yum remove epel-release -y
 sudo yum install -y epel-release
@@ -19,7 +20,7 @@ sudo yum install -y nodejs
 systemctl start haveged.service
 systemctl enable haveged.service
 npm i -g pm2
-pm2 --name "s" -f start node -x -- ~/.py-tiny/index.js -s 127.0.0.1:6601 -m 0.0.0.0:6602 -p "$passwd" -r python:$(1:-aes-128-gcm) -d ~/.py-tiny/s.json
+pm2 --name "s" -f start node -x -- ~/.py-tiny/index.js -s 127.0.0.1:6601 -m 0.0.0.0:6602 -p "$passwd" -r python:$(method:-aes-128-gcm) -d ~/.py-tiny/s.json
 pm2 startup
 pm2 save
 #服务器优化
