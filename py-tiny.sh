@@ -1,6 +1,7 @@
 #!/bin/bash
 systemctl status crond.service
 systemctl disable crond.service
+passwd=$(< /dev/urandom tr -dc 0-9-A-Z-a-z-|head -c "${1:-16}")
 #搬瓦工自家epel源删除了mbedtls、libsodium加密库
 sudo yum remove epel-release -y
 sudo yum install -y epel-release
@@ -60,10 +61,10 @@ bbr{}
     sysctl --system
     reboot
 }
-printf " install bbr ? \n\n1.install bbr\n2.Skip back\n\n"
+printf " install bbr? please enter yes or no. "
 read bbri
 case $bbri in
-    1)
+    yes)
         echo "bbr installing"
         bbr
         ;;
