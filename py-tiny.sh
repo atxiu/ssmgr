@@ -1,5 +1,6 @@
 #!/bin/bash
 method=$1
+echo $method
 systemctl status crond.service
 systemctl disable crond.service
 passwd=$(< /dev/urandom tr -dc 0-9-A-Z-a-z-|head -c "${1:-16}")
