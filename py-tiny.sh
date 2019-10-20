@@ -64,7 +64,7 @@ sysctl --system
 printf " install bbr? please enter yes or no. "
 read bbri
 case “$bbri” in
-    yes)
+    1)
         echo "bbr installing"
         bbr
         ;;
