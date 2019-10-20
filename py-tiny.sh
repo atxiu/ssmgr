@@ -22,18 +22,6 @@ npm i -g pm2
 pm2 --name "s" -f start node -x -- ~/.py-tiny/index.js -s 127.0.0.1:6601 -m 0.0.0.0:6602 -p "$passwd" -r python:$(1:-aes-128-gcm) -d ~/.py-tiny/s.json
 pm2 startup
 pm2 save
-bbr()
-{
-    #开启bbr
-    rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
-    rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm
-    yum --enablerepo=elrepo-kernel install kernel-ml -y
-    egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \'
-    grub2-set-default 0
-    grub2-mkconfig -o /boot/grub2/grub.cfg
-    echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
-    echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
-}
 #服务器优化
 (
 cat <<EOF
@@ -60,6 +48,18 @@ net.ipv4.tcp_congestion_control = hybla
 EOF
 )>/etc/sysctl.d/local.conf
 sysctl --system
+bbr()
+{
+    #开启bbr
+    rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+    rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm
+    yum --enablerepo=elrepo-kernel install kernel-ml -y
+    egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \'
+    grub2-set-default 0
+    grub2-mkconfig -o /boot/grub2/grub.cfg
+    echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+    echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+}
 printf " install bbr? please enter yes or no. "
 read bbri
 case $bbri in
