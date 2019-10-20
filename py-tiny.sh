@@ -61,9 +61,9 @@ sysctl --system
     echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
     echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
 }
-printf " install bbr"
-read chajian
-case $chajian in
+printf " install bbr,please enter yes or no."
+read plugin-bbr
+case $plugin-bbr in
     1)
         echo "bbr installing"
         bbr
@@ -71,4 +71,4 @@ case $chajian in
     *)
         echo "Skip back bbr"
 esac
-
+reboot
