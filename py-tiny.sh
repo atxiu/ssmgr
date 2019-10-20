@@ -62,8 +62,8 @@ sysctl --system
     echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
 }
 printf " install bbr? please enter yes or no. "
-read bbri
-case $bbri in
+read chajian
+case $chajian in
     1)
         echo "bbr installing"
         bbr
