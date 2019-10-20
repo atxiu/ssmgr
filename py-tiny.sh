@@ -62,9 +62,9 @@ sysctl --system
     echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
 }
 printf " install bbr please enter yes or no"
-read plugin-bbr
-case $plugin-bbr in
-    1)
+read plugin
+case $plugin in
+    bbr)
         echo "bbr installing"
         bbr
         ;;
