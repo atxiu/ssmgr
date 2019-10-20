@@ -22,7 +22,7 @@ npm i -g pm2
 pm2 --name "s" -f start node -x -- ~/.py-tiny/index.js -s 127.0.0.1:6601 -m 0.0.0.0:6602 -p "$passwd" -r python:$(1:-aes-128-gcm) -d ~/.py-tiny/s.json
 pm2 startup
 pm2 save
-bbr{}
+bbr()
 {
     #开启bbr
     rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
