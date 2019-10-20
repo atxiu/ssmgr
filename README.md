@@ -3,8 +3,9 @@
 #### shadowsocks-manager s端自动化部署，默认为AES-256-GCM，密码16位大小写字母随机。
 tiny py版带bbr
 ```
-curl -fsSL https://raw.github.com/atxiu/ssmgr/master/py-tiny.sh | bash -s rc4-md5
+bash <(curl -fsSL https://raw.github.com/atxiu/ssmgr/master/py-tiny.sh) rc4-md5
 ```
+~~curl -fsSL https://raw.github.com/atxiu/ssmgr/master/py-tiny.sh | bash -s rc4-md5~~
 ~~sh -c "$(curl -fsSL https://raw.github.com/atxiu/ssmgr/master/py-tiny.sh)"~~
 
 tiny版不带bbr
