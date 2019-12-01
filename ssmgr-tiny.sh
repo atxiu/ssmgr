@@ -4,7 +4,7 @@ systemctl disable crond.service
 passwd=$(< /dev/urandom tr -dc 0-9-A-Z-a-z-|head -c "${1:-16}")
 #搬瓦工自家epel源删除了mbedtls、libsodium加密库
 sudo yum remove epel-release -y
-sudo yum install -y yum-fastestmirror yum-plugin-copr curl
+sudo yum install -y yum-fastestmirror yum-plugin-copr curl python-urllib3
 sudo yum copr enable librehat/shadowsocks -y
 sudo yum install -y epel-release
 sudo yum install shadowsocks-libev haveged git ntpdate -y
