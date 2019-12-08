@@ -12,6 +12,7 @@ sudo yum install shadowsocks-libev haveged git ntpdate curl -y
 timedatectl set-timezone Asia/Shanghai
 ntpdate ntp1.aliyun.com
 timedatectl set-local-rtc 1
+hwclock --systohc
 mkdir ~/.py-tiny
 git clone "https://github.com/atxiu/shadowsocks-manager-tiny.git" ~/.py-tiny
 curl -sL https://rpm.nodesource.com/setup_10.x | bash -
