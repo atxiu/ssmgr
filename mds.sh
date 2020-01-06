@@ -20,9 +20,7 @@ services:
   image: gyteng/ssmgr-tiny
   restart: always
   network_mode: host
-  command: node index.js -s 127.0.0.1:${sport:-6601} -m 0.0.0.0:$[${sport:-6601}+1] -p $passwd -r libev:${method:-aes-128-gcm} -d /ssmgr/data.json
-  volumes:
-      - /root/.ssmgr/${folder:-ds}/s:/ssmgr
+  command: node index.js -s 127.0.0.1:${sport:-6601} -m 0.0.0.0:$[${sport:-6601}+1] -p $passwd -r libev:${method:-aes-128-gcm} -d ./data.json
 EOF
 )>/root/.ssmgr/${folder:-ds}/docker-compose.yml
 /usr/bin/docker-compose -f /root/.ssmgr/${folder:-ds}/docker-compose.yml up -d
