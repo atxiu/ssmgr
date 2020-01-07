@@ -4,7 +4,7 @@ sport=$2
 method=$3
 passwd=$(< /dev/urandom tr -dc 0-9-A-Z-a-z-|head -c 16)
 yum install epel-release -y
-yum install docker docker-compose ntpdate -y
+yum install docker docker-compose -y
 systemctl start docker
 systemctl enable docker
 docker pull gyteng/ssmgr-tiny
