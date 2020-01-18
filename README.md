@@ -3,7 +3,7 @@
 #### shadowsocks-manager s端自动化部署，默认为AES-256-GCM，密码16位大小写字母随机。
 docker
 ```
-bash <(curl -fsSL https://raw.github.com/atxiu/ssmgr/master/ds.sh) s1 6001 aes-128-gcm
+bash <(curl -fsSL https://raw.github.com/atxiu/ssmgr/master/mds.sh) s1 6001 aes-128-gcm
 ```
 
 tiny py版带bbr
