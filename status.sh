@@ -23,3 +23,4 @@ EOF
 )>/lib/systemd/system/status.service
 systemctl restart status.service
 systemctl enable status.service
+systemctl status status.service
