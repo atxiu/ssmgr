@@ -1,4 +1,5 @@
 #!/bin/bash
+yum install wget -y
 mkdir /root/smartping
 cd /root/smartping
 wget https://github.com/smartping/smartping/releases/download/v0.8.0/smartping-v0.8.0.tar.gz
