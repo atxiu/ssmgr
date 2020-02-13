@@ -25,6 +25,7 @@ EOF
 )>/root/.ssmgr/${folder:-ds}/docker-compose.yml
 /usr/bin/docker-compose -f /root/.ssmgr/${folder:-ds}/docker-compose.yml up -d
 chmod -Rf 755 /root/.ssmgr/
-echo "/usr/bin/docker-compose -f /root/.ssmgr/${folder:-ds}/docker-compose.yml up -d" >>/etc/rc.d/rc.local
+ln -s /usr/bin/docker-compose /usr/local/bin/docker-compose
+echo "/usr/local/bin/docker-compose -f /root/.ssmgr/${folder:-ds}/docker-compose.yml up -d" >>/etc/rc.d/rc.local
 chmod +x /etc/rc.d/rc.local
 cat /root/.ssmgr/${folder:-ds}/docker-compose.yml
