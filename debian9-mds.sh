@@ -30,7 +30,7 @@ services:
 EOF
 )>$pwd/.ssmgr/${folder:-ds}/docker-compose.yml
 /usr/local/bin/docker-compose -f $pwd/.ssmgr/${folder:-ds}/docker-compose.yml up -d
-chmod +x $pwd/.ssmgr/
+chmod +x $pwd/.ssmgr/${folder:-ds}/docker-compose.yml
 (
 cat <<EOF >/etc/rc.local
 #!/bin/sh -e
