@@ -1,6 +1,7 @@
 #!/bin/bash
-rip=$2
-rport=$3
+pwd=$(pwd)
+rip=$1
+rport=$2
 lport=$rport-1
 tun=$rip-8800
 (
