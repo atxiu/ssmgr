@@ -26,7 +26,7 @@ cat <<EOF >/etc/rc.local
 
 exit 0
 EOF
-)>/etc/rc.local
+)
 chmod +x /etc/rc.local
 systemctl start rc-local.service
 systemctl enable rc-local.service
