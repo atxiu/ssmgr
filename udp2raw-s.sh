@@ -3,7 +3,7 @@ pwd=$(pwd)
 folder=$1
 lport=$2
 rport=$[lport-1]
-tun=$[rport-8800]
+tun=$[lport-8800]
 mkdir $pwd/.udp2raw
 mkdir $pwd/.udp2raw/$folder
 (
