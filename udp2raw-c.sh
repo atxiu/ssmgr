@@ -4,7 +4,7 @@ folder=$1
 rip=$2
 rport=$3
 lport=$[rport-1]
-tun=$[rip-8800]
+tun=$[rport-8800]
 mkdir $pwd/.udp2raw
 mkdir $pwd/.udp2raw/$folder
 (
