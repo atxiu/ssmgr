@@ -1,11 +1,11 @@
 #!/bin/bash
 pwd=$(pwd)
-folder=$1.
+folder=$1
 rip=$2
 rport=$3
 lport=$rport-1
 tun=$rip-8800
-mkdir $pwd/.udp2raw/$folder/docker-compose.yml
+mkdir $pwd/.udp2raw/$folder
 (
 cat <<EOF >$pwd/.udp2raw/$folder/docker-compose.yml
 # docker-compose.yml
