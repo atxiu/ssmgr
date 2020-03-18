@@ -56,4 +56,4 @@ EOF
 chmod +x $pwd/.udp2raw/$folder/docker-compose.yml
 echo "/usr/local/bin/docker-compose -f $pwd/.udp2raw/$folder/docker-compose.yml up -d"
 echo "Add to /etc/rc.local"
-cat $pwd/.ssmgr/${folder:-ds}/docker-compose.yml
+cat $pwd/.udp2raw/$folder/docker-compose.yml
