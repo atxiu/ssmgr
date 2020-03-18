@@ -2,36 +2,25 @@
 folder=$1
 sport=$2
 method=$3
+pwd=$(pwd)
 passwd=$(< /dev/urandom tr -dc 0-9-A-Z-a-z-|head -c 16)
-yum install epel-release -y
-yum install docker docker-compose ntpdate -y
-systemctl start docker
-systemctl enable docker
-timedatectl set-timezone Asia/Shanghai
-ntpdate ntp1.aliyun.com
-timedatectl set-local-rtc 1
-hwclock --systohc
-docker pull gyteng/ssmgr-alpine
-mkdir /root/.ssmgr
-mkdir /root/.ssmgr/${folder:-ds}
+docker pull gyteng/ssmgr-tiny
+mkdir $pwd/.ssmgr
+mkdir $pwd/.ssmgr/${folder:-ds}
 (
 cat <<EOF
 # docker-compose.yml
 version: '3'
-
 services:
  ${folder:-ds}:
-  image: gyteng/ssmgr-alpine
+  image: gyteng/ssmgr-tiny
   restart: always
   network_mode: host
-  command: ssmgr -t s -s 127.0.0.1:${sport:-6601} -m 0.0.0.0:$[${sport:-6601}+1] -p $passwd -r libev:${method:-aes-128-gcm}
-  volumes:
-      - /root/.ssmgr/${folder:-ds}/s:/root/.ssmgr
+  command: node /ssmgr/index.js -s 127.0.0.1:${sport:-6601} -m 0.0.0.0:$[${sport:-6601}+1] -p $passwd -r libev:${method:-aes-128-gcm} -d ./data.json
 EOF
-)>/root/.ssmgr/${folder:-ds}/docker-compose.yml
-/usr/bin/docker-compose -f /root/.ssmgr/${folder:-ds}/docker-compose.yml up -d
-chmod -Rf 755 /root/.ssmgr/
-echo "/usr/bin/docker-compose -f /root/.ssmgr/${folder:-ds}/docker-compose.yml up -d" >>/etc/rc.d/rc.local
-echo "/usr/sbin/ntpdate ntp1.aliyun.com" >>/etc/rc.d/rc.local
-chmod +x /etc/rc.d/rc.local
-cat /root/.ssmgr/${folder:-ds}/docker-compose.yml
+)>$pwd/.ssmgr/${folder:-ds}/docker-compose.yml
+/usr/local/bin/docker-compose -f $pwd/.ssmgr/${folder:-ds}/docker-compose.yml up -d
+chmod +x $pwd/.ssmgr/${folder:-ds}/docker-compose.yml
+echo "/usr/local/bin/docker-compose -f $pwd/.ssmgr/${folder:-ds}/docker-compose.yml up -d"
+echo "Add to /etc/rc.local"
+cat $pwd/.ssmgr/${folder:-ds}/docker-compose.yml
