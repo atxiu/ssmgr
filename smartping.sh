@@ -1,13 +1,13 @@
 #!/bin/bash
-yum install wget -y
-mkdir /root/smartping
-cd /root/smartping
+pwd=$(pwd)
+mkdir $pwd/smartping
+cd $pwd/smartping
 wget https://github.com/smartping/smartping/releases/download/v0.8.0/smartping-v0.8.0.tar.gz
-tar zxvf smartping-v0.8.0.tar.gz -C /root/smartping
-cd /root/smartping
+tar zxvf smartping-v0.8.0.tar.gz -C $pwd/smartping
+cd $pwd/smartping
 ./control start
 firewall-cmd --zone=public --add-port=8899/tcp --permanent
 firewall-cmd --reload
-chmod -R 755 /root/smartping/ 
-echo "/root/smartping/control start" >>/etc/rc.d/rc.local
-chmod +x /etc/rc.d/rc.local
+chmod +x $pwd/smartping/control
+echo "$pwd/smartping/control start" >>/etc/rc.d/rc.local
+echo "add to /etc/rc.local"
