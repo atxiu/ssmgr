@@ -9,5 +9,5 @@ cd $pwd/smartping
 firewall-cmd --zone=public --add-port=8899/tcp --permanent
 firewall-cmd --reload
 chmod +x $pwd/smartping/control
-echo "$pwd/smartping/control start" >>/etc/rc.d/rc.local
+echo "$pwd/smartping/control start"
 echo "add to /etc/rc.local"
