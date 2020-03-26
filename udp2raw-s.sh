@@ -45,7 +45,7 @@ services:
       --seq-mode 3 \
       --sock-buf 10240 \
       --force-sock-buf \
-      --keep-rule \
+      --lower-level auto \
       --fix-gro"
     network_mode: "host"
     cap_add:
