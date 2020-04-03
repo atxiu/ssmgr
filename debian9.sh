@@ -30,7 +30,28 @@ EOF
 chmod +x /etc/rc.local
 systemctl start rc-local.service
 systemctl enable rc-local.service
-echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
-echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
-echo "vm.swappiness = 10" >> /etc/sysctl.conf
+(
+cat <<EOF >> /etc/sysctl.conf
+vm.swappiness = 0
+net.ipv4.neigh.default.gc_stale_time=120
+
+net.ipv4.conf.all.rp_filter=0
+net.ipv4.conf.default.rp_filter=0
+net.ipv4.conf.default.arp_announce = 2
+net.ipv4.conf.lo.arp_announce=2
+net.ipv4.conf.all.arp_announce=2
+
+net.ipv4.tcp_max_tw_buckets = 5000
+net.ipv4.tcp_syncookies = 1
+net.ipv4.tcp_max_syn_backlog = 1024
+net.ipv4.tcp_synack_retries = 2
+
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+
+net.core.default_qdisc=fq
+net.ipv4.tcp_congestion_control=bbr
+EOF
+)
 sysctl -p
