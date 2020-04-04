@@ -94,4 +94,11 @@ net.ipv4.tcp_wmem = 4096 65536 67108864
 net.ipv4.tcp_mtu_probing = 1
 EOF
 )
+echo "ulimit -SHn 1024000">>/etc/profile
+(
+cat <<EOF >> /etc/security/limits.conf
+*                soft    nofile          512000
+*                hard    nofile          1024000
+EOF
+)
 sysctl -p
