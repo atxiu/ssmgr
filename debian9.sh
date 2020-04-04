@@ -96,9 +96,13 @@ EOF
 )
 (
 cat <<EOF >> /etc/security/limits.conf
+*                soft    nproc           512000
+*                hard    nproc           1024000
 *                soft    nofile          512000
-root             soft    nofile          512000
 *                hard    nofile          1024000
+root             soft    nproc           512000
+root             soft    nproc           1024000
+root             soft    nofile          512000
 root             soft    nofile          1024000
 EOF
 )
