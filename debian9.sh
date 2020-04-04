@@ -92,6 +92,10 @@ net.ipv4.tcp_rmem = 4096 87380 67108864
 net.ipv4.tcp_wmem = 4096 65536 67108864
 # turn on path MTU discovery
 net.ipv4.tcp_mtu_probing = 1
+
+################################
+kernel.msgmax = 65535
+kernel.msgmnb = 65535
 EOF
 )
 (
