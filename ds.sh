@@ -23,12 +23,11 @@ services:
           cpus: '0.25'
           memory: 200M
         reservations:
-          cpus: '0.1'
           memory: 50M
 EOF
 )>$pwd/.ssmgr/${folder:-ds}/docker-compose.yml
-/usr/local/bin/docker-compose -f $pwd/.ssmgr/${folder:-ds}/docker-compose.yml up -d
+/usr/local/bin/docker-compose -f $pwd/.ssmgr/${folder:-ds}/docker-compose.yml --compatibility up -d
 chmod +x $pwd/.ssmgr/${folder:-ds}/docker-compose.yml
-echo "/usr/local/bin/docker-compose -f $pwd/.ssmgr/${folder:-ds}/docker-compose.yml up -d"
+echo "/usr/local/bin/docker-compose -f $pwd/.ssmgr/${folder:-ds}/docker-compose.yml --compatibility up -d"
 echo "Add to /etc/rc.local"
 cat $pwd/.ssmgr/${folder:-ds}/docker-compose.yml
