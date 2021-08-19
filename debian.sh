@@ -83,5 +83,4 @@ root             soft    nofile          512000
 root             soft    nofile          1024000
 EOF
 )
-ln -s /usr/sbin/sysctl /usr/local/bin/sysctl
 sysctl -p
