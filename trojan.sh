@@ -16,7 +16,7 @@ EOF
 )
 systemctl enable nginx --now
 curl https://get.acme.sh | sh -s email=my@example.com
-bash --login
+source ~/.bashrc
 acme.sh --issue -d $domain --nginx
 (
 cat <<EOF >> /etc/nginx/conf.d/$domain.conf
