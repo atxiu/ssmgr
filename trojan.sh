@@ -14,7 +14,7 @@ server {
 }
 EOF
 )
-systemctl enable nginx --now
+systemctl restart nginx
 curl https://get.acme.sh | sh -s email=my@example.com
 source ~/.bashrc
 /root/.acme.sh/acme.sh --issue -d $domain --nginx
@@ -41,6 +41,7 @@ EOF
 mkdir cert
 /root/.acme.sh/acme.sh --install-cert -d $domain --fullchain-file ./cert/full.cer --key-file ./cert/key.key
 systemctl restart nginx
+systemctl enable nginx
 (
 cat <<EOF >> docker-compose.yml
 # docker-compose.yml
